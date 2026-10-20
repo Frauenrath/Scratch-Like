@@ -1,66 +1,67 @@
-# ScratchLike – Éditeur & Interpréteur de Programmation Visuelle
+# ScratchLike – Visual Programming Editor & Interpreter
 
-## À quoi sert l'application ?
+## What is the application for?
 
-**ScratchLike** est une application d'apprentissage de la programmation inspirée du logiciel Scratch, permettant de composer graphiquement des séquences d'instructions afin de piloter visuellement les déplacements et le comportement d'une "tortue" sur un canevas graphique. Conçu comme un interpréteur de langage, le système intègre un moteur algorithmique complet capable de gérer dynamiquement des variables (déclaration, affectation, incrémentation), des structures de contrôle complexes comme les boucles imbriquées, ainsi qu'un module de surveillance en temps réel pour intercepter et lever des erreurs à l'exécution (*Runtime Errors*).
-
----
-
-## Fonctionnalités clés
-
-### 1. Moteur Algorithmique & Gestion des Variables
-* **Déclaration typée :** Zone de déclaration obligatoire en début de programme pour les variables de type entier (`VAR_DECLARATION`), initialisées nativement à `0`.
-* **Mutateurs de données :** Actions d'assignation directe (`VAR_ASSIGNMENT`) et d'incrémentation/décrémentation (`INCREMENT_VARIABLE`) supportant des valeurs littérales ou d'autres variables.
-* **Structures de contrôle :** Implémentation de boucles répétitives (`REPEAT` ... `END_REPEAT`) supportant l'imbrication complexe et l'utilisation de variables comme compteurs.
-
-### 2. Interface Graphique & Exécution (JavaFX)
-* **Éditeur dynamique :** Possibilité d'injecter ou d'insérer une nouvelle instruction au milieu d'un programme existant, après l'action sélectionnée.
-* **Contrôles UI intelligents :** Apparition contextuelle de boutons d'incrémentation `+` / `-` lors de la configuration de valeurs littérales, s'effaçant automatiquement au profit du nom d'une variable.
-* **Modes d'exécution :** Commutation entre un mode d'exécution Manuel (pas-à-pas) et un mode Automatique géré par un curseur de vitesse variable (*Slider*).
-* **Zone de monitoring en temps réel :** Panneau d'affichage affichant à chaque étape la position \((X, Y)\) de la tortue, son angle d'orientation, l'état du tracé (crayon levé/baissé), ainsi que la table des symboles (valeurs en temps réel de toutes les variables).
-
-### 3. Persistance & Sécurité (Parsing `.scr`)
-* **Format :** Sérialisation et désérialisation textuelle des blocs du programme au format `.scr` (ex: `VAR_ASSIGNMENT;nb;45`, `REPEAT;nb`).
-* **Gestion des erreurs au Runtime :** Interruption immédiate du flux d'exécution et levée d'exceptions graphiques claires si une variable non initialisée ou une valeur corrompue est appelée lors d'un déplacement.
+**ScratchLike** is an educational programming application inspired by Scratch. It allows users to graphically compose sequences of instructions to visually control the movements and behavior of a "turtle" on a graphical canvas. Designed as a language interpreter, the system features a complete algorithmic engine capable of dynamically managing variables (declaration, assignment, incrementation), complex control structures like nested loops, and a real-time monitoring module to intercept and raise runtime errors (*Runtime Errors*).
 
 ---
 
-## Technologies utilisées
+## Key Features
 
-* **Langage principal :** Java (Conception Orientée Objet : classes abstraites, polymorphisme, énumérations d'états)
-* **Interface Graphique :** JavaFX
-* **Design Pattern Architectural :** **MVVM (Model-View-ViewModel)** garantissant un découplage strict entre les spécifications métier, les modèles de données et le Data Binding de la vue.
-* **Synchronisation des données :** Événements JavaFX et structures réactives `ObservableList` pour l'actualisation synchrone du Canevas et de la Zone d'état.
-* **Outils & Outils de build :** IntelliJ IDEA, Git
+1. ### Algorithmic Engine & Variable Management
 
----
+- **Typed declaration:** Mandatory declaration area at the beginning of the program for integer variables (`VAR_DECLARATION`), natively initialized to `0`.
+- **Data mutators:** Direct assignment actions (`VAR_ASSIGNMENT`) and increment/decrement actions (`INCREMENT_VARIABLE`) supporting literal values or other variables.
+- **Control structures:** Implementation of repetitive loops (`REPEAT` ... `END_REPEAT`) supporting complex nesting and the use of variables as counters.
 
-## Comment utiliser l'application ?
+### 2. Graphical Interface & Execution (JavaFX)
+- **Dynamic editor:** Ability to inject or insert a new instruction in the middle of an existing program, after the selected action.
+- **Smart UI controls:** Contextual appearance of `+` / `-` increment buttons when configuring literal values, automatically disappearing in favor of a variable name.
+- **Execution modes:** Switching between a Manual execution mode (step-by-step) and an Automatic mode managed by a variable speed slider (*Slider*).
+- **Real-time monitoring area:** Display panel showing at each step the turtle's position (X, Y), orientation angle, drawing status (pen up/down), and symbol table (real-time values of all variables).
 
-### Prérequis
-* **Java Development Kit (JDK) 17** ou supérieur.
-
-### Lancement du projet
-1. **Télécharger le projet en zip et décompresser**
-2. **Lancer l'exéctubale LaunchApp.jar**
-
-### Écrire et exécuter un programme
-1. **Déclarer des variables :** Ajoutez l'action `VAR_DECLARATION` au tout début de votre script pour configurer vos variables (ex: `nb`, `step`).
-2. **Assigner des valeurs :** Utilisez les blocs d'affectation pour configurer vos variables de déplacement.
-3. **Créer des boucles :** Encapsulez vos mouvements (`MOVE_FORWARD`, `TURN_LEFT`) entre un bloc `REPEAT` et un bloc `END_REPEAT`.
-4. **Piloter la vitesse :** Ajustez le curseur (*Slider*) de vitesse, puis cliquez sur **Exécuter (Mode Automatique)** pour observer le tracé de la tortue en temps réel.
-5. **Sauvegarder :** Utilisez le menu d'export pour générer votre fichier de script `.scr`.
+### 3. Persistence & Security (`.scr` Parsing)
+- **Format:** Textual serialization and deserialization of program blocks in `.scr` format (e.g., `VAR_ASSIGNMENT;nb;45`, `REPEAT;nb`).
+- **Runtime error management:** Immediate execution flow interruption and display of clear graphical exceptions if an uninitialized variable or corrupted value is called during movement.
 
 ---
 
-## Choix d'architecture et Note de livraison
+## Technologies Used
 
-* **Pattern MVVM :** L'entièreté de la logique métier (calcul des trajectoires de la tortue, table des symboles des variables) est isolée des composants graphiques JavaFX. Le ViewModel sert de passerelle via le mécanisme de *Property Binding*.
-* **Gestion des boucles :** Afin d'empêcher les effets de bord, une règle métier stricte interdit la modification de la valeur d'une variable au sein d'une boucle si cette même variable sert de compteur à ladite boucle.
+- **Main language:** Java (Object-Oriented Design: abstract classes, polymorphism, state enumerations)
+- **Graphical Interface:** JavaFX
+- **Architectural Design Pattern:** **MVVM (Model-View-ViewModel)** ensuring strict decoupling between business logic, data models, and View Data Binding.
+- **Data synchronization:** JavaFX events and `ObservableList` reactive structures for synchronous updates of the Canvas and State area.
+- **Build & Development Tools:** IntelliJ IDEA, Git
 
 ---
-*Projet académique collaboratif réalisé à l'EPFC dans le cadre du module d'Architecture des Applications Informatiques.*
 
-## Captures d'écrans
+## How to Use the Application?
+
+### Prerequisites
+- **Java Development Kit (JDK) 17** or higher.
+
+### Launching the Project
+1. **Download the project as a zip file and extract it**
+2. **Run the executable LaunchApp.jar**
+
+### Writing and Running a Program
+1. **Declare variables:** Add the `VAR_DECLARATION` action at the very beginning of your script to configure your variables (e.g., `nb`, `step`).
+2. **Assign values:** Use assignment blocks to configure your movement variables.
+3. **Create loops:** Wrap your movements (`MOVE_FORWARD`, `TURN_LEFT`) between a `REPEAT` block and an `END_REPEAT` block.
+4. **Control speed:** Adjust the speed slider (*Slider*), then click **Execute (Automatic Mode)** to observe the turtle's path in real time.
+5. **Save:** Use the export menu to generate your `.scr` script file.
+
+---
+
+## Architectural Choices & Delivery Note
+
+- **MVVM Pattern:** Entire business logic (calculating turtle trajectories, variable symbol table) is isolated from JavaFX graphical components. The ViewModel acts as a bridge through property binding (*Property Binding*).
+- **Loop management:** To prevent side effects, a strict business rule prohibits modifying the value of a variable inside a loop if that same variable serves as a counter for said loop.
+
+---
+*Collaborative academic project carried out at EPFC as part of the IT Applications Architecture module.*
+
+## Screenshots
 
 ![main-menu.png](Screenshots/main-menu.png)
