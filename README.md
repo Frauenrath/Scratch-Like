@@ -41,7 +41,8 @@
 * **Java Development Kit (JDK) 17** ou supérieur.
 
 ### Lancement du projet
-**Lancer l'exéctubale LaunchApp.jar:**
+1. **Télécharger le projet en zip et décompresser**
+2. **Lancer l'exéctubale LaunchApp.jar**
 
 ### Écrire et exécuter un programme
 1. **Déclarer des variables :** Ajoutez l'action `VAR_DECLARATION` au tout début de votre script pour configurer vos variables (ex: `nb`, `step`).
