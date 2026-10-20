@@ -60,3 +60,6 @@
 ---
 *Projet académique collaboratif réalisé à l'EPFC dans le cadre du module d'Architecture des Applications Informatiques.*
 
+## Captures d'écrans
+
+![main-menu.png](Screenshots/main-menu.png)
