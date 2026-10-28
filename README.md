@@ -60,7 +60,7 @@
 - **Loop management:** To prevent side effects, a strict business rule prohibits modifying the value of a variable inside a loop if that same variable serves as a counter for said loop.
 
 ---
-*Collaborative academic project carried out at EPFC as part of the IT Applications Architecture module.*
+*Collaborative academic project carried out with two other peers at EPFC as part of the IT Applications Architecture module.*
 
 ## Screenshots
 
